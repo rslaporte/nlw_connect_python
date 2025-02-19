@@ -1,8 +1,9 @@
 from src.model.configs.connection import DBConnectionHandler
 from src.model.entities.inscritos import Inscritos
+from interfaces.subscriber_repository import SubscribeRepositoryInterface
 
 
-class SubscribersRepository:
+class SubscribersRepository(SubscribeRepositoryInterface):
     def insert(self, subscriber_infos: dict) -> None:
         with DBConnectionHandler() as db:
             try:
