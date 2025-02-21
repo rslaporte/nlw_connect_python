@@ -1,10 +1,10 @@
 import pytest
 from .events_link_repository import EventsLinkRepository
 
-@pytest.mark.skip("Insert in DB")
+#@pytest.mark.skip("Insert in DB")
 def test_insert_eventos_link():
-    event_id = 12
-    subs_id = 18
+    event_id = 1
+    subs_id = 3
     event_repo = EventsLinkRepository()
 
     event_repo.insert(event_id, subs_id)
