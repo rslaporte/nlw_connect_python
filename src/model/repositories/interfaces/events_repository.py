@@ -1,10 +1,10 @@
 from abc import ABC, abstractmethod
-from src.model.entities.eventos import Eventos
+from src.model.entities.eventos import Event
 
-class EventosRepositoryInterface(ABC):
+class EventsRepositoryInterface(ABC):
     
     @abstractmethod
     def insert(self, event_name: str) -> None: pass
             
     @abstractmethod            
-    def select_event(self, event_name: str) -> Eventos: pass
+    def select_event(self, event_name: str) -> Event: pass

@@ -1,10 +1,10 @@
 from abc import ABC, abstractmethod
-from src.model.entities.eventos import Eventos
+from src.model.entities.inscritos import Subscriber
 
 class SubscribeRepositoryInterface:
 
     @abstractmethod
-    def insert(self, event_name: str) -> None: pass
+    def insert(self, subscriber_info: dict) -> None: pass
             
     @abstractmethod
-    def select_event(self, event_name: str) -> Eventos: pass
+    def select_sub(self, subscriver_email: str, evento_id: int) -> Subscriber: pass

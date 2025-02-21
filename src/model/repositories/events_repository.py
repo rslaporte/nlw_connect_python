@@ -1,12 +1,12 @@
 from src.model.configs.connection import DBConnectionHandler
-from src.model.entities.eventos import Eventos
-from .interfaces.eventos_repository import EventosRepositoryInterface
+from src.model.entities.eventos import Event
+from src.model.repositories.interfaces.events_repository import EventsRepositoryInterface
 
-class EventosRepository(EventosRepositoryInterface):
+class EventsRepository(EventsRepositoryInterface):
     def insert(self, event_name: str) -> None:
         with DBConnectionHandler() as db:
             try:
-                new_event = Eventos(nome=event_name)
+                new_event = Event(nome=event_name)
                 db.session.add(new_event)
                 db.session.commit()
 
@@ -14,12 +14,12 @@ class EventosRepository(EventosRepositoryInterface):
                 db.session.rollback()
                 raise exception
             
-    def select_event(self, event_name: str) -> Eventos:
+    def select_event(self, event_name: str) -> Event:
         with DBConnectionHandler() as db:
             data = (
                 db.session
-                .query(Eventos)
-                .filter(Eventos.nome == event_name)
+                .query(Event)
+                .filter(Event.nome == event_name)
                 .one_or_none()
             )
 

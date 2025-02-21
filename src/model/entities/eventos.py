@@ -1,7 +1,7 @@
 from src.model.configs.base import Base
 from sqlalchemy import Column, String, Integer
 
-class Eventos(Base):
+class Event(Base):
     __tablename__ = "Eventos"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
