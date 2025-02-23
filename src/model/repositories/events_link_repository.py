@@ -1,6 +1,6 @@
 import random
 from src.model.configs.connection import DBConnectionHandler
-from src.model.entities.eventos_link import EventsLink
+from src.model.entities.events_link import EventsLink
 from src.model.repositories.interfaces.events_link_repository import EventsLinkRepositoryInterface
 
 class EventsLinkRepository(EventsLinkRepositoryInterface):

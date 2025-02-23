@@ -1,14 +1,14 @@
 from sqlalchemy import func, desc
 from src.model.configs.connection import DBConnectionHandler
-from src.model.entities.inscritos import Subscriber
-from src.model.repositories.interfaces.subscriber_repository import SubscribeRepositoryInterface
+from src.model.entities.subscribers import Subscribers
+from src.model.repositories.interfaces.subscriber_repository import SubscriberRepositoryInterface
 
 
-class SubscribersRepository(SubscribeRepositoryInterface):
+class SubscribersRepository(SubscriberRepositoryInterface):
     def insert(self, subscriber_infos: dict) -> None:
         with DBConnectionHandler() as db:
             try:
-                new_subscriber = Subscriber(
+                new_subscriber = Subscribers(
                     nome=subscriber_infos.get("nome"),
                     email=subscriber_infos.get("email"),
                     link=subscriber_infos.get("link"),
@@ -22,7 +22,7 @@ class SubscribersRepository(SubscribeRepositoryInterface):
                 db.session.rollback()
                 raise exception
                   
-    def select_subscriber(self, email: str, event_id: int) -> Subscriber:
+    def select_subscriber(self, email: str, event_id: int) -> Subscribers:
         with DBConnectionHandler() as db:
             data = (
                 db.session
@@ -36,31 +36,33 @@ class SubscribersRepository(SubscribeRepositoryInterface):
 
             return data
         
-    def select_subscribers_by_link(self, link: str, event_id: id) -> Subscriber:
+    def select_subscribers_by_link(self, link: str, event_id: int) -> Subscribers:
         with DBConnectionHandler() as db:
             data = (
                 db.session
-                .query(Subscriber)
+                .query(Subscribers)
                 .filter(
-                    Subscriber.evento_id == event_id,
-                    Subscriber.link == link
+                    Subscribers.evento_id == event_id,
+                    Subscribers.link == link
                 )
                 .all()
             )
+        
+        return data
 
     def get_ranking(self, event_id: int) -> list:
         with DBConnectionHandler() as db:
             result = (
                 db.session
                 .query(
-                    Subscriber.link,
-                    func.count(Subscriber.id).label("total")
+                    Subscribers.link,
+                    func.count(Subscribers.id).label("total")
                 )
                 .filter(
-                    Subscriber.evento_id == event_id,
-                    Subscriber.link.isnot(None)
+                    Subscribers.evento_id == event_id,
+                    Subscribers.link.isnot(None)
                 )
-                .group_by(Subscriber.link)
+                .group_by(Subscribers.link)
                 .order_by(desc("total"))
                 .all()
             )

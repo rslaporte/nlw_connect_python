@@ -1,3 +1,3 @@
-from .eventos import Event
-from .inscritos import Subscriber
-from .eventos_link import EventsLink
+from .events import Events
+from .subscribers import Subscribers
+from .events_link import EventsLink

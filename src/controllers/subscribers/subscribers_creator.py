@@ -1,9 +1,9 @@
-from src.model.repositories.interfaces.subscriber_repository import SubscribeRepositoryInterface
+from src.model.repositories.interfaces.subscriber_repository import SubscriberRepositoryInterface
 from src.https_types.http_request import HttpRequest
 from src.https_types.http_response import HttpResponse
 
 class SubscriberCreator:
-    def __init__(self, subs_repo: SubscribeRepositoryInterface):
+    def __init__(self, subs_repo: SubscriberRepositoryInterface):
         self.__subs_repo = subs_repo
     
     def create(self, http_request: HttpRequest) -> HttpResponse:

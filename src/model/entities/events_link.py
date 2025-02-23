@@ -5,6 +5,6 @@ class EventsLink(Base):
     __tablename__ = "Eventos_link"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    evento_id = Column(Integer, ForeignKey("Eventos.id"), nullable=False)
-    inscrito_id = Column(Integer, ForeignKey("Inscritos.id"), nullable=False)
+    evento_id = Column(Integer, ForeignKey("Events.id"), nullable=False)
+    inscrito_id = Column(Integer, ForeignKey("Subscribers.id"), nullable=False)
     link = Column(String, nullable=False)
